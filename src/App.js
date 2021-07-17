@@ -3,7 +3,10 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <h1>Searchspring fashion</h1>
+      <label htmlFor="">Searchspring fashion</label>
+      <input type="text" placeholder="Search..." />
+      <button>Search</button>
     </div>
   );
 }
