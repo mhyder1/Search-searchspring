@@ -2,18 +2,27 @@ import "./App.css";
 
 function App() {
   const SEARCH_API_URL =
-    "https://[siteId].a.searchspring.io/api/search/search.json";
+    "https://scmq7n.a.searchspring.io/api/search/search.json?q=dress&resultsFormat=native&siteId=scmq7n";
+  //[siteId].a.searchspring.io/api/search/search.json?q=dress&resultsFormat=native&siteId=[siteId]
 
-  return (
+  https: return (
     <div className="App">
-      <h1>Searchspring fashion</h1>
-      <form action="">
-        <label htmlFor="label" className="label">
-          Searchspring fashion:
-        </label>
-        <input type="text" placeholder="Search for Brand, Color, Size..." />
-        <button>Search</button>
-      </form>
+      <div className="container">
+        <h1 className="title">Searchspring fashion</h1>
+        <form action="" className="form">
+          <label htmlFor="label" className="label">
+            Searchspring fashion:
+          </label>
+          <input
+            type="text"
+            placeholder="Search for Brand, Color, Size..."
+            className="input"
+          />
+          <button type="submit" className="button">
+            Search
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
