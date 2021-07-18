@@ -64,6 +64,7 @@ label {
 .title {
   font-size: 4.4rem;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  text-align: center;
 }
 
 .form {
