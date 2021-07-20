@@ -47,12 +47,24 @@ function App() {
           </button>
         </form>
         <div>
-          <div id="resultsDisplay">
+          <div className="resultsDisplay">
             {/* {results != null ? results.length : "no"} */}
             {results != null ? (
-              results.map((item, i) => {
-                return <p>{item.name}</p>;
-              })
+              results.map((item) => (
+                <div className="itemRow" key={item.id}>
+                  <div className="itemName">
+                    <p>{item.name}</p>
+                  </div>
+                  <div className="itemPrice">
+                    <p>${item.price}</p>
+                  </div>
+                  <div className="itemImage">
+                    <img src={item.thumbnailImageUrl} alt="image" />
+                  </div>
+                </div>
+
+                // <img src={item.thumbnailImageUrl} alt="image" />;
+              ))
             ) : (
               <div>Search for something </div>
             )}
