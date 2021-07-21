@@ -26,6 +26,8 @@ function App() {
     setSearch(e.target.value);
   };
 
+  const handlePageNumbers = () => {};
+
   return (
     <div className="App">
       <div className="container">
@@ -39,8 +41,8 @@ function App() {
             name="text"
             placeholder="Search for Brand, Color, Size..."
             className="input"
-            onChange={(search) => handleChange(search)}
-            search={search}
+            onChange={handleChange}
+            value={search}
           />
           <button type="submit" className="button">
             Search
@@ -52,14 +54,20 @@ function App() {
             {results != null ? (
               results.map((item) => (
                 <div className="itemRow" key={item.id}>
+                  <div className="itemImage">
+                    <img src={item.thumbnailImageUrl} alt="product" />
+                  </div>
                   <div className="itemName">
                     <p>{item.name}</p>
                   </div>
                   <div className="itemPrice">
+                    {/* {item.msrp && item.msrp * 1 > item.price * 1 
+                      ? item.price
+                      : item.msrp} */}
                     <p>${item.price}</p>
-                  </div>
-                  <div className="itemImage">
-                    <img src={item.thumbnailImageUrl} alt="image" />
+                    <p style={{ textDecorationLine: "line-through" }}>
+                      ${item.msrp}
+                    </p>
                   </div>
                 </div>
 
@@ -69,6 +77,7 @@ function App() {
               <div>Search for something </div>
             )}
           </div>
+          {results.pagination}
         </div>
       </div>
     </div>

@@ -100,7 +100,7 @@ label {
   background-color: rgba(0, 0, 0, 0.85);
 }
 
-.resultsDisplay .itemRow {
+/* .resultsDisplay .itemRow {
   width: calc(80% - 14px);
   margin: 0 0 12px 6px;
   box-shadow: 1px 2px 30px 1px #130506;
@@ -153,6 +153,27 @@ label {
 .resultsDisplay .itemRow .itemPrice i {
   color: #f9f9f9;
   cursor: pointer;
+} */
+
+.resultsDisplay {
+  display: flex;
+  /* justify-content: space-between; */
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+.resultsDisplay .itemRow .itemPrice i {
+  color: #f9f9f9;
+  cursor: pointer;
+}
+
+.resultsDisplay .itemRow .itemPrice p {
+  margin: 0;
+  color: black;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 20px;
 }
 
 @media (min-width: 768px) {
@@ -163,11 +184,5 @@ label {
   }
   .input {
     margin-bottom: 0;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .card-list {
-    column-count: 1;
   }
 }
