@@ -4,22 +4,16 @@ import React, { useState, useEffect } from "react";
 function App() {
   const SEARCH_API_URL =
     "https://scmq7n.a.searchspring.io/api/search/search.json?resultsFormat=native&siteId=scmq7n&q=";
-  //[siteId].a.searchspring.io/api/search/search.json?q=dress&resultsFormat=native&siteId=[siteId]
 
   const [search, setSearch] = useState("");
   const [results, setResult] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  // const [pages, setPages] = useState([]);
   const [nextPage, setNextPage] = useState(0);
   const [previousPage, setPreviousPage] = useState(0);
   const [search2, setSearch2] = useState("");
 
-  // s
-
   const getData = () => {
-    // e.preventDefault();
-    // console.log("In GET data");
     const url = SEARCH_API_URL + search + "&page=" + currentPage;
     fetch(url)
       .then((res) => res.json())
@@ -30,7 +24,6 @@ function App() {
         setNextPage(pagination.nextPage);
         setTotalPages(pagination.totalPages);
         setPreviousPage(pagination.previousPage);
-        // initalisePagesArray(pagination.totalPages);
         console.log(data);
       });
   };
@@ -41,10 +34,6 @@ function App() {
 
   const handleButtonClick = (buttonNumber) => {
     setCurrentPage(buttonNumber);
-    //update current page
-    //update previous page
-    //update nextPage
-    //call getData again
   };
 
   useEffect(() => {
@@ -119,7 +108,6 @@ function App() {
             {nextPage > 0 ? <div> Next </div> : <div></div>}
           </div>
           <div className="resultsDisplay">
-            {/* {results != null ? results.length : "no"} */}
             {results != null ? (
               results.map((item) => (
                 <div className="itemRow" key={item.id}>
@@ -147,14 +135,11 @@ function App() {
                     </div>
                   )}
                 </div>
-
-                // <img src={item.thumbnailImageUrl} alt="image" />;
               ))
             ) : (
               <div>Search for something </div>
             )}
           </div>
-          {/* {results.pagination} */}
         </div>
       </div>
     </div>
