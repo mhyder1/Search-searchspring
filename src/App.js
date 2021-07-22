@@ -9,24 +9,17 @@ function App() {
   const [search, setSearch] = useState("");
   const [results, setResult] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [nextPage, setNextPage] = useState(2);
   const [totalPages, setTotalPages] = useState(0);
+  // const [pages, setPages] = useState([]);
+  const [nextPage, setNextPage] = useState(0);
   const [previousPage, setPreviousPage] = useState(0);
-  const [pages, setPages] = useState([]);
+  const [search2, setSearch2] = useState("");
 
-  const initalisePagesArray = (total) => {
-    console.log("seting pages");
-    console.log(total);
-    for (var i = 1; i < total; i++) {
-      setPages((pages) => [...pages, i]);
-      console.log(i);
-    }
-    console.log(pages);
-  };
+  // s
 
-  const getData = (e) => {
-    e.preventDefault();
-    console.log("In GET data");
+  const getData = () => {
+    // e.preventDefault();
+    // console.log("In GET data");
     const url = SEARCH_API_URL + search + "&page=" + currentPage;
     fetch(url)
       .then((res) => res.json())
@@ -37,28 +30,56 @@ function App() {
         setNextPage(pagination.nextPage);
         setTotalPages(pagination.totalPages);
         setPreviousPage(pagination.previousPage);
-        initalisePagesArray(pagination.totalPages);
+        // initalisePagesArray(pagination.totalPages);
         console.log(data);
       });
   };
 
   const handleChange = (e) => {
-    setSearch(e.target.value);
+    setSearch2(e.target.value);
   };
 
-  const handlePageNumbers = () => {};
   const handleButtonClick = (buttonNumber) => {
+    setCurrentPage(buttonNumber);
     //update current page
     //update previous page
     //update nextPage
     //call getData again
   };
 
+  useEffect(() => {
+    getData();
+  }, [search, currentPage]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
+
+  let pages = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push(i);
+  }
+
+  const isPageSeen = (pageNumber) => {
+    if (currentPage + 5 > pageNumber && currentPage - 5 < pageNumber) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div className="App">
       <div className="container">
         <h1 className="title">Searchspring fashion</h1>
-        <form action="" className="form" onSubmit={getData}>
+        <form
+          action=""
+          className="form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            setSearch(search2);
+          }}
+        >
           <label htmlFor="label" className="label">
             Searchspring fashion:
           </label>
@@ -68,7 +89,7 @@ function App() {
             placeholder="Search for Brand, Color, Size..."
             className="input"
             onChange={handleChange}
-            value={search}
+            value={search2}
           />
           <button type="submit" className="button">
             Search
@@ -80,9 +101,16 @@ function App() {
             {pages.length > 0 ? (
               pages.map((pageNumber) => {
                 return (
-                  <button id={pageNumber} onClick={handleButtonClick}>
-                    {pageNumber}
-                  </button>
+                  isPageSeen(pageNumber) && (
+                    <button
+                      id={pageNumber}
+                      onClick={() => {
+                        handleButtonClick(pageNumber);
+                      }}
+                    >
+                      {pageNumber}
+                    </button>
+                  )
                 );
               })
             ) : (
